@@ -57,6 +57,7 @@
     { type: 'VALIDATEBOX', element: 'INPUT' },
     { type: 'COMBO', element: 'INPUT' },
     { type: 'COMBOBOX', element: 'SELECT' },
+    { type: 'COMBOGRID', element: 'SELECT' },
     { type: 'COMBOTREE', element: 'INPUT' },
     { type: 'NUMBERBOX', element: 'INPUT' },
     { type: 'DATEBOX', element: 'INPUT' },
@@ -106,9 +107,12 @@
     var child, i, el = document.createElement(nodeName)
 
     for (i in attributes) if (has.call(attributes, i)) {
-      child = document.createAttribute(hyphenify(i))
-      child.nodeValue = attributes[i]
-      el.setAttributeNode(child)
+        if(['object','function'].indexOf(typeof attributes[i]) === -1)
+        {
+            child = document.createAttribute(hyphenify(i))
+            child.nodeValue = attributes[i]
+            el.setAttributeNode(child)
+        }
     }
 
     for (i = 0; i < childNodes.length; i++) {

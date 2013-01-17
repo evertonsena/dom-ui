@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/demo/demo.css">        
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" src="http://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="dom-ui.js"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    </head>
+    <body>    
+    </body>
+    <script>
+    //
+    $(function(){
+        $('head').append
+        (
+            STYLE
+            (
+                CSS
+                (
+                    'label',
+                   {
+                       padding: 5
+                   }
+                )    
+            )    
+        );
+        //
+        $('body').DOM_UI
+        (        
+            PANEL
+            (
+                {
+                    title: 'Formulário',
+                    style: 'padding: 5px'
+                },
+                LABEL
+                (
+                    "Escolha a cidade: ",                    
+                    COMBOGRID
+                    ({
+                        idField: 'cidade',
+                        textField: 'cidade',
+                        width: 200,
+                        panelWidth:200,  
+                        fitColumns:true,  
+                        columns:[[  
+                            {field:'cidade',title:'Cidade',width:150},  
+                            {field:'estado',title:'Estado',width:50}
+                        ]],
+                        onShowPanel: function()
+                        {
+                            $(this).combogrid('grid').datagrid
+                            (
+                                'loadData',
+                                { 
+                                    rows: [{cidade: 'Rio de Janeiro', estado: 'RJ'},{cidade: 'São Paulo', estado: 'SP'},{cidade: 'Santos', estado: 'SP'},{cidade: 'Salvador', estado: 'BH'}], total: 1 
+                                }
+                            )
+                        }
+                    })        
+                ),
+                LABEL
+                (
+                    "Escolha o time: ",                   
+                    COMBOGRID
+                    ({
+                        idField: 'time',
+                        textField: 'time',
+                        width: 200,
+                        panelWidth:200,  
+                        fitColumns:true,  
+                        columns:[[  
+                            {field:'time',title:'Time',width:150},  
+                            {field:'serie',title:'Serie',width:50}
+                        ]],
+                        onShowPanel: function()
+                        {
+                            $(this).combogrid('grid').datagrid
+                            (
+                                'loadData',
+                                { 
+                                    rows: [{time: 'Flamengo', serie: 'A'},{time: 'São Paulo', serie: 'A'},{time: 'Santos', serie: 'A'},{time: 'Bahia', serie: 'B'}], total: 1 
+                                }
+                            )
+                        }
+                    })        
+                ),
+                LABEL( LINKBUTTON({iconCls: 'icon-save'}, "Cadastrar") ),
+                LABEL( LINKBUTTON({iconCls: 'icon-remove'}, "Limpar") )
+            )
+        );
+    });   
+    </script>
+</html>
