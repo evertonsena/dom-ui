@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/demo/demo.css">        
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" src="http://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="dom-ui.js"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />        
+    </head>
+    <body>    
+    </body>
+    <script>
+    //
+    $(function(){
+        $('body').DOM_UI
+        (
+            LAYOUT
+            (
+                {
+                    style: 'width:1024px;height:600px;'
+                },
+                DIV
+                (
+                    {
+                        region: 'west',
+                        split: true,
+                        title: 'Navigator',
+                        style: 'width:150px; padding: 5px'
+                    },
+                    ACCORDION
+                    (
+                        {
+                            style: 'width:100px;height:500px;'
+                        },
+                        DIV
+                        (
+                            {
+                                title: 'title 1',
+                                iconCls:'icon-save',
+                                style: 'overflow:auto;padding:10px;'
+                            }
+                        ),
+                        DIV
+                        (
+                            {
+                                title: 'title 2',
+                                iconCls:'icon-save',
+                                style: 'overflow:auto;padding:10px;'
+                            }
+                        ),
+                        DIV
+                        (
+                            {
+                                title: 'title 3',
+                                iconCls:'icon-save',
+                                style: 'overflow:auto;padding:10px;'
+                            }
+                        ),
+                        DIV
+                        (
+                            {
+                                title: 'title 4',
+                                iconCls:'icon-save',
+                                style: 'overflow:auto;padding:10px;'
+                            }
+                        ),
+                        DIV
+                        (
+                            {
+                                title: 'title 5',
+                                iconCls:'icon-save',
+                                style: 'overflow:auto;padding:10px;'
+                            }
+                        )                            
+                    )
+                ),
+                DIV
+                (
+                    {
+                        region: 'center',
+                        title: 'CRUD',
+                        style: 'padding: 5px;'
+                    },
+                    PANEL
+                    (
+                        {
+                            title: 'View',
+                            style: 'padding: 5px'
+                        },
+                        DATAGRID
+                        (
+                            {
+                                title:'My DataGrid',
+                                iconCls:'icon-save',
+                                width:700,
+                                height:350,
+                                nowrap: true,
+                                autoRowHeight: false,
+                                striped: true,
+                                collapsible:true,
+                                url:'datagrid_data.json',
+                                sortName: 'code',
+                                sortOrder: 'desc',
+                                remoteSort: false,
+                                idField:'code',
+                                frozenColumns:
+                                [
+                                    [
+                                        {field:'ck',checkbox:true},
+                                        {title:'Code',field:'code',width:80,sortable:true}
+                                    ]
+                                ],
+                                columns:
+                                [
+                                    [
+                                        {title:'Base Information',colspan:3},
+                                        {
+                                            field:'opt',title:'Operation',width:100,align:'center', rowspan:2,
+                                            formatter:function(value,rec){
+                                                    return '<span style="color:red">Edit Delete</span>';
+                                            }
+                                        }
+                                    ],[
+                                        {field:'name',title:'Name',width:120},
+                                        {   
+                                            field:'addr',title:'Address',width:220,rowspan:2,sortable:true,
+                                            sorter:function(a,b){
+                                                    return (a>b?1:-1);
+                                            }
+                                        },
+                                        {field:'col4',title:'Col41',width:150,rowspan:2}
+                                    ]
+                                ],
+                                onRowContextMenu: function()
+                                {
+                                    alert('entrou');
+                                },
+                                pagination:true,
+                                rownumbers:true,
+                                toolbar:
+                                [
+                                    {
+                                        id:'btnadd',
+                                        text:'Add',
+                                        iconCls:'icon-add',
+                                        handler:function(){
+                                                $('#btnsave').linkbutton('enable');
+                                                alert('add')
+                                        }
+                                    },{
+                                        id:'btncut',
+                                        text:'Cut',
+                                        iconCls:'icon-cut',
+                                        handler:function(){
+                                                $('#btnsave').linkbutton('enable');
+                                                alert('cut')
+                                        }
+                                    },'-',{
+                                        id:'btnsave',
+                                        text:'Save',
+                                        disabled:true,
+                                        iconCls:'icon-save',
+                                        handler:function(){
+                                                $('#btnsave').linkbutton('disable');
+                                                alert('save')
+                                        }
+                                    }
+                                ]
+                            }
+                        )   
+                    ),
+                    HR({ style: 'margin: 5px' }),
+                    TABS
+                    (
+                        {
+                            id: "container",
+                            height: 150
+                        },
+                        DIV
+                        (
+                            {
+                                title: 'Created',
+                                style: 'padding: 5px'
+                            },
+                            TABS
+                            (
+                                {
+                                    height: 75
+                                },
+                                DIV
+                                (
+                                    {
+                                        title: '1'
+                                    }
+                                ),
+                                DIV
+                                (
+                                    {
+                                        title: '2'
+                                    }
+                                ),
+                                DIV
+                                (
+                                    {
+                                        title: '3'
+                                    }
+                                )
+                            )                               
+                        ),
+                        DIV
+                        (
+                            {
+                                title: 'Update'
+                            }
+                        ),
+                        DIV
+                        (
+                            {
+                                title: 'Delete'
+                            }
+                        )
+                    )                        
+                )                
+            )
+        );
+    });   
+    </script>
+</html>
